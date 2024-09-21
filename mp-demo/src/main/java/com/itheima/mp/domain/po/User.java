@@ -1,5 +1,9 @@
 package com.itheima.mp.domain.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,6 +14,7 @@ public class User {
     /**
      * 用户id
      */
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -51,4 +56,7 @@ public class User {
      * 更新时间
      */
     private LocalDateTime updateTime;
+
+    @TableField( exist = false)
+    private String other;
 }
