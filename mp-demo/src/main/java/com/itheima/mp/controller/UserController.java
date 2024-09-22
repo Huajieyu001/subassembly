@@ -39,15 +39,13 @@ public class UserController {
     @ApiOperation("获取用户接口")
     @GetMapping("/{id}")
     public UserVO get(@ApiParam("用户id")@PathVariable("id") Long id){
-        User user = userService.getById(id);
-        return BeanUtil.copyProperties(user, UserVO.class);
+        return userService.queryUserAndAddressById(id);
     }
 
     @ApiOperation("获取全部用户接口")
     @GetMapping
     public List<UserVO> getAll(@ApiParam("集合")@RequestParam("ids") List<Long> ids){
-        List<User> list = userService.listByIds(ids);
-        return BeanUtil.copyToList(list, UserVO.class);
+        return userService.queryUserAndAddressByIds(ids);
     }
 
     @ApiOperation("更新用户接口")
