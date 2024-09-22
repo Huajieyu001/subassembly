@@ -1,5 +1,7 @@
 package com.itheima.mp.service;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itheima.mp.domain.po.User;
 import com.itheima.mp.domain.po.UserInfo;
 import org.junit.jupiter.api.Test;
@@ -59,5 +61,23 @@ public class UserServiceImplTest {
         }
         long end = System.currentTimeMillis();
         System.out.println("耗时：" + (end - start));
+    }
+
+    @Test
+    void testPage(){
+        int no = 1;
+        int size = 2;
+
+        Page<User> page = Page.of(no, size);
+        page = page.addOrder(new OrderItem("balance", true));
+        page = page.addOrder(new OrderItem("id", true));
+
+        Page<User> paged = userService.page(page);
+
+        System.out.println("paged.getTotal() = " + paged.getTotal());
+        System.out.println("paged.getPages() = " + paged.getPages());
+        System.out.println("Data:");
+        List<User> records = paged.getRecords();
+        records.forEach(System.out::println);
     }
 }
