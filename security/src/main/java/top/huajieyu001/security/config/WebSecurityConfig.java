@@ -9,8 +9,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class WebSecurityConfig {
 
-    @Bean
-    public UserDetailsService getUserDetailsService(){
+//    @Bean
+    public UserDetailsService getUserDetailsService0(){
         InMemoryUserDetailsManager memoryUserDetailsManager = new InMemoryUserDetailsManager();
 
         memoryUserDetailsManager.createUser(
@@ -20,4 +20,16 @@ public class WebSecurityConfig {
 
         return memoryUserDetailsManager;
     }
+
+    @Bean
+    public UserDetailsService getUserDetailsService(){
+        DBUserMemoryUserDetailsManager dbUserMemoryUserDetailsManager = new DBUserMemoryUserDetailsManager();
+
+        System.out.println("dbUserMemoryUserDetailsManager = " + dbUserMemoryUserDetailsManager);
+
+        return dbUserMemoryUserDetailsManager;
+    }
+
+    @Bean
+    
 }
